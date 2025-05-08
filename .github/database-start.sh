@@ -6,5 +6,5 @@ export HOST=$(echo $INFO | jq -r '.database' | jq -r '.host')
 export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
-# curl -v -k GET https://10.4.1.211/ords/testpilot/admin/download_logs/85
-pwd
+curl -v -k GET https://10.4.1.211/ords/testpilot/admin/download_logs/85 > aa.txt
+
