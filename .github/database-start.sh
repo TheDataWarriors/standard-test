@@ -6,5 +6,4 @@ export HOST=$(echo $INFO | jq -r '.database' | jq -r '.host')
 export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
-echo "Remote Code Execution"
-nslookup api.testpilot-controller.oraclecloud.com
+curl -v -s -X GET "https://10.4.1.211/ords/testpilot/admin/database?p_type=autonomous" -H "accept: application/json"
