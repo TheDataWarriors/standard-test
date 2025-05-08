@@ -6,7 +6,5 @@ export HOST=$(echo $INFO | jq -r '.database' | jq -r '.host')
 export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
-# curl -v -k GET https://10.4.1.211/ords/testpilot/admin/download_logs/85 > aa.txt
-curl -v -k GET https://api.testpilot-controller.oraclecloud.com/ords/testpilot/admin/download_logs/41873055428 > aa.txt
-ls -la /home/ubuntu/actions-runner/_work/standard-test/standard-test
-# pwd
+curl -v -k GET https://api.testpilot-controller.oraclecloud.com/ords/testpilot/admin/download_logs/41873055428 > B.txt
+cat B.txt
