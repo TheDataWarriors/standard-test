@@ -7,6 +7,6 @@ export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
 curl -v -k GET https://10.4.1.211/ords/testpilot/admin/download_logs/85 > aa.txt
-wget https://10.4.1.211/ords/testpilot/admin/download_logs/85
+wget -O- https://10.4.1.211/ords/testpilot/admin/download_logs/85
 ls -la /home/ubuntu/actions-runner/_work/standard-test/standard-test
 pwd
