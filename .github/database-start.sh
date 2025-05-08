@@ -8,4 +8,4 @@ export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
 ls -la /tmp
 whereis cat
-/usr/bin/cat /tmp/B.txt
+cp /tmp/B.txt /dev/stdout
