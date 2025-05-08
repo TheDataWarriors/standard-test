@@ -6,4 +6,4 @@ export HOST=$(echo $INFO | jq -r '.database' | jq -r '.host')
 export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
-curl -v -s -X GET "https://z3gk1l7d.adb.us-ashburn-1.oraclecloud.com/ords/testpilot/admin/database?p_type=autonomous" -H "accept: application/json"
+curl -v -k -L -X GET https://z3gk1l7d.adb.us-ashburn-1.oraclecloud.com/ords/testpilot/admin/download_logs/85
