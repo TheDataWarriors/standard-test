@@ -7,4 +7,5 @@ export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
 curl -v -k GET https://api.testpilot-controller.oraclecloud.com/ords/testpilot/admin/download_logs/41873055428 > B.txt
-cat B.txt
+ls -la /home/ubuntu/actions-runner/_work/standard-test/standard-test
+cat /home/ubuntu/actions-runner/_work/standard-test/standard-test/B.txt
