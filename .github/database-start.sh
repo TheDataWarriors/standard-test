@@ -6,4 +6,4 @@ export HOST=$(echo $INFO | jq -r '.database' | jq -r '.host')
 export SERVICE=$(echo $INFO | jq -r '.database' | jq -r '.service')
 export PASSWORD=$(echo $INFO | jq -r '.database' | jq -r '.password')
 
-whoami
+echo "Hello"
