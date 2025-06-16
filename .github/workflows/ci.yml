@@ -36,7 +36,7 @@ jobs:
           - rdbms: base-database-service-19c
     steps:
       - id: build_guard
-        uses: loiclefevre/test@v1.0.0
+        uses: loiclefevre/test@v1.0.11
         with:
           action: skip-testing
           prefix_list: .github/workflows/ci.yml,README.md,LICENSE,.gitignore
@@ -53,14 +53,11 @@ jobs:
       # test
       - id: create_database
         if: steps.build_guard.outputs.skip_tests == 'no'
-        uses: loiclefevre/test@v1.0.0
+        uses: loiclefevre/test@v1.0.11
         with:
           oci-service: ${{ matrix.rdbms }}
           action: create
           user: other_test
-          password: ${{ secrets.TEST_USER_PASSWORD }}
-        env:
-          TESTPILOT_CLIENT_ID: ${{ secrets.TESTPILOT_CLIENT_ID }}
 
       - name: Set up Java 21
         if: steps.build_guard.outputs.skip_tests == 'no'
@@ -68,7 +65,6 @@ jobs:
         with:
           distribution: 'graalvm'
           java-version: '21'
-
       - name: Generate cache key
         if: steps.build_guard.outputs.skip_tests == 'no'
         id: cache-key
@@ -120,6 +116,9 @@ jobs:
           RUNID: ${{ github.run_number }}
           HOST: ${{ steps.create_database.outputs.database_host }}
           SERVICE: ${{ steps.create_database.outputs.database_service }}
+          PASSWORD: ${{ steps.create_database.outputs.database_password }}
+          TESTPILOT_CLIENT_ID: ""
+          TESTPILOT_TOKEN: ""
           #LD_PRELOAD: /home/ubuntu/libtfojdbc1.so
           #LD_LIBRARY_PATH: /home/ubuntu
           # These runners have no HOME variable set by default, we need to explicitly set it to make the build work
@@ -127,14 +126,12 @@ jobs:
         run: ./.github/build-github.sh
         shell: bash
 
-      - uses: loiclefevre/test@v1.0.0
+      - uses: loiclefevre/test@v1.0.11
         if: steps.build_guard.outputs.skip_tests == 'no'
         with:
           oci-service: ${{ matrix.rdbms }}
           action: delete
           user: other_test
-        env:
-          TESTPILOT_CLIENT_ID: ${{ secrets.TESTPILOT_CLIENT_ID }}
 
       # Upload build scan data.
       # The actual publishing must be done in a separate job (see ci-report.yml).
